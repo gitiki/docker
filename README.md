@@ -7,5 +7,5 @@ Gitiki is an open source PHP wiki engine from a Git repository (or not).
 Starting a Gitiki instance is simple:
 
 ```bash
-$ docker run --name some-gitiki -v /your/wiki/path:/srv/wiki -p 1234:80 -d gitiki/gitiki
+$ docker run --detach --name "some-gitiki" --volume "/your/wiki/path:/srv/wiki" --publish "1234:80" gitiki/gitiki
 ```
