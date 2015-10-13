@@ -27,11 +27,11 @@ ENV COMPOSER_NO_INTERACTION 1
 
 
 RUN requires=" \
-        gitiki/gitiki:$GITIKI_VERSION \
         gitiki/code-highlight:$GITIKI_VERSION \
         gitiki/redirector:$GITIKI_VERSION \
     " \
- && mkdir -p /srv/gitiki && cd /srv/gitiki \
+ && composer create-project --prefer-dist gitiki/gitiki /srv/gitiki $GITIKI_VERSION \
+ && cd /src/gitiki \
  && composer require $requires && composer clear-cache
 
 
