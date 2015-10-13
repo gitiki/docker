@@ -31,7 +31,7 @@ RUN requires=" \
         gitiki/redirector:$GITIKI_VERSION \
     " \
  && composer create-project --prefer-dist gitiki/gitiki /srv/gitiki $GITIKI_VERSION \
- && cd /src/gitiki \
+ && cd /srv/gitiki \
  && composer require $requires && composer clear-cache
 
 
