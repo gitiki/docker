@@ -31,13 +31,20 @@ RUN requires=" \
         gitiki/redirector:$GITIKI_VERSION \
     " \
  && composer create-project --prefer-dist gitiki/gitiki /srv/gitiki $GITIKI_VERSION \
- && cd /srv/gitiki \
+ && cd /srv/gitiki && chmod +x gitiki \
  && composer require $requires && composer clear-cache
 
 
-RUN apt-get update && apt-get install -y npm --no-install-recommends && rm -rf /var/lib/apt/lists/* \
- && ln -s /usr/bin/nodejs /usr/local/bin/node \
- && cd /srv/gitiki && npm install
+ENV NODE_VERSION 5.5.0
+
+RUN curl https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -o node.tar.gz
+ && mkdir -p /opt/node \
+ && tar -xz --strip-components=1 -C /opt/node -f node.tar.gz \
+ && rm node.tar.gz
+
+ENV PATH /opt/node/bin:$PATH
+
+RUN cd /srv/gitiki && npm install
 
 
 RUN a2enmod rewrite
