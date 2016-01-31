@@ -37,7 +37,7 @@ RUN requires=" \
 
 ENV NODE_VERSION 5.5.0
 
-RUN curl https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -o node.tar.gz
+RUN curl https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -o node.tar.gz \
  && mkdir -p /opt/node \
  && tar -xz --strip-components=1 -C /opt/node -f node.tar.gz \
  && rm node.tar.gz
