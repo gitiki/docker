@@ -35,10 +35,17 @@ RUN requires=" \
  && composer require $requires && composer clear-cache
 
 
+RUN apt-get update && apt-get install -y npm --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+ && cd /srv/gitiki && npm install
+
+
 RUN a2enmod rewrite
 COPY .htaccess /var/www/html/.htaccess
 COPY index.php /var/www/html/index.php
 
-
 VOLUME ["/srv/wiki"]
-EXPOSE 80
+
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["apache2-foreground"]
