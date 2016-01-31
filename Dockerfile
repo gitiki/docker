@@ -36,6 +36,7 @@ RUN requires=" \
 
 
 RUN apt-get update && apt-get install -y npm --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+ && ln -s /usr/bin/nodejs /usr/local/bin/node \
  && cd /srv/gitiki && npm install
 
 
